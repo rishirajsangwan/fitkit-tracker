@@ -1,0 +1,19 @@
+{
+  "overview": "FitKit Tracker — Bluetooth bike ride tracker with auto-save every 60 seconds and same-day ride resume.",
+  "features": [
+    "Connect to FitKit bike via Bluetooth and display live speed, distance, calories, resistance, and cadence",
+    "Auto-save ride progress every 60 seconds during an active ride",
+    "Resume a partial ride from the same day if the app closes or Bluetooth disconnects",
+    "Ride history with saved sessions",
+    "Clean dark sport-app UI with Start, Pause, and Stop controls"
+  ],
+  "category": "fitness-tracker",
+  "tags": [
+    "fitness",
+    "bluetooth",
+    "cycling",
+    "workout",
+    "health"
+  ],
+  "last_updated": "2026-06-19T02:39:58.549Z"
+}

@@ -1,0 +1,91 @@
+type Time = int;
+type StatsResult = 
+ record {
+   avgHeartRate: opt nat;
+   avgSpeed: float64;
+   maxHeartRate: opt nat;
+   rides: vec Ride;
+   totalCalories: nat;
+   totalDistance: float64;
+   totalDurationSeconds: nat;
+   totalHydration: nat;
+   totalRides: nat;
+ };
+type SaveRideRequest = 
+ record {
+   avgHeartRate: opt nat;
+   avgResistance: float64;
+   avgSpeedKph: float64;
+   calories: float64;
+   distanceMeters: float64;
+   durationSeconds: nat;
+   hydrationLogged: opt nat;
+   maxHeartRate: opt nat;
+   maxResistance: nat;
+   minResistance: nat;
+   peakResistance: nat;
+ };
+type RideSummary = 
+ record {
+   totalCalories: float64;
+   totalCaloriesNat: nat;
+   totalDistance: float64;
+   totalDistanceMeters: float64;
+   totalDurationSeconds: nat;
+   totalRides: nat;
+ };
+type RideId = nat;
+type Ride = 
+ record {
+   avgHeartRate: opt nat;
+   avgResistance: float64;
+   avgSpeedKph: float64;
+   calories: float64;
+   date: Time;
+   distanceMeters: float64;
+   durationSeconds: nat;
+   hydrationLogged: opt nat;
+   id: RideId;
+   maxHeartRate: opt nat;
+   maxResistance: nat;
+   minResistance: nat;
+   peakResistance: nat;
+ };
+type PartialRideId = text;
+type PartialRide = 
+ record {
+   avgCadence: nat;
+   avgHeartRate: nat;
+   avgResistance: nat;
+   avgSpeed: float64;
+   calories: nat;
+   distanceKm: float64;
+   elapsedSeconds: nat;
+   id: PartialRideId;
+   isPartial: bool;
+   lastSavedAt: int;
+   startTimestamp: int;
+ };
+type AutoSaveRideRequest = 
+ record {
+   avgCadence: nat;
+   avgHeartRate: nat;
+   avgResistance: nat;
+   avgSpeed: float64;
+   calories: nat;
+   distanceKm: float64;
+   elapsedSeconds: nat;
+   id: PartialRideId;
+   startTimestamp: int;
+ };
+service : {
+  autoSaveRide: (req: AutoSaveRideRequest) -> (PartialRide);
+  clearPartialRide: (dayStartMs: int, dayEndMs: int) -> (bool);
+  deleteRide: (id: RideId) -> (bool);
+  getPartialRide: (dayStartMs: int, dayEndMs: int) -> (opt PartialRide) query;
+  getRidesByDateRange: (startMs: int, endMs: int) -> (vec Ride) query;
+  getStatsByPeriod: (startMs: int, endMs: int) -> (StatsResult) query;
+  getSummary: () -> (RideSummary) query;
+  listRides: () -> (vec Ride) query;
+  saveRide: (req: SaveRideRequest) -> (Ride);
+}
